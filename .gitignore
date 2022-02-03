@@ -1,0 +1,6 @@
+*.out
+*cppMaker
+*.o
+*.txt
+!CMakeLists.txt
+build
