@@ -10,7 +10,7 @@
 std::ifstream Parser::checkFile(std::string filename)
 {
     std::ifstream file;
-    if (!RegUtils::isMatch(filename, "^[^\\.]+\\.nts$")) {
+    if (!RegUtils::isMatch(filename, "^(.*\\\/)*[^\\.]+\\.nts$")) {
         throw std::invalid_argument("Invalid file name");
     }
     file.open(filename);
