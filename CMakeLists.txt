@@ -5,13 +5,24 @@
 # set the minimum required version of CMake
 cmake_minimum_required(VERSION 3.17)
 
-# set the project name
-project(nanotekspice)
+# project name
+set(PROJECT_NAME nanotekspice)
 
-# set the standard c++ compiler
+# set the project name
+project(${PROJECT_NAME})
+
+# standard c++ compiler
 set(CMAKE_CXX_STANDARD 20)
 
-# set the flags for the c++ compiler
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
+# flags for the c++ compiler
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 
-add_executable(nanotekspice TekSpice.cpp utils/RegUtils.cpp)
+# debug flags
+set(CMAKE_CXX_FLAGS_DEBUG_INIT "${CMAKE_CXX_FLAGS_DEBUG_INIT} -g")
+
+# source files
+set(SRC_FILES   TekSpice.cpp
+                src/utils/RegUtils.cpp)
+
+# create the executable
+add_executable(${PROJECT_NAME} ${SRC_FILES})

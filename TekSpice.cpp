@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <regex>
-#include "utils/RegUtils.hpp"
+#include "src/utils/RegUtils.hpp"
 
 int main(int ac, char **av)
 {
