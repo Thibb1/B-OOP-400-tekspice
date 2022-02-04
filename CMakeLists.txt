@@ -22,7 +22,8 @@ set(CMAKE_CXX_FLAGS_DEBUG_INIT "${CMAKE_CXX_FLAGS_DEBUG_INIT} -g")
 
 # source files
 set(SRC_FILES   TekSpice.cpp
-                src/utils/RegUtils.cpp)
+                src/utils/RegUtils.cpp
+                src/parser/Parser.cpp)
 
 # create the executable
 add_executable(${PROJECT_NAME} ${SRC_FILES})

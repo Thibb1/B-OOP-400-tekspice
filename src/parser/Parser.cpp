@@ -11,11 +11,11 @@ std::ifstream Parser::checkFile(std::string filename)
 {
     std::ifstream file;
     if (!RegUtils::isMatch(filename, "^(.*\\/)*[^\\.]+\\.nts$")) {
-        throw std::invalid_argument("Invalid file name");
+        throw std::invalid_argument("Invalid file name: " + filename);
     }
     file.open(filename);
     if (!file.is_open()) {
-        throw std::invalid_argument("File not found");
+        throw std::invalid_argument("File not found: " + filename);
     }
     return file;
 }
@@ -28,8 +28,9 @@ bool Parser::isInVector(std::string str, std::vector<std::string> vec)
 void Parser::parse(std::string filename)
 {
     std::ifstream file = checkFile(filename);
+    // std::ifstream file(filename);
     std::string line;
-    std::string arg = "([\\w]+)$";
+    std::string arg = " ([\\w]+)$";
     std::string linkPattern = "^((\\w+):(\\d+)) ((\\w+):(\\d+))$";
     std::string chipsets[] = {
         "^(input)" + arg,
@@ -80,11 +81,16 @@ void Parser::parse(std::string filename)
             if (sectionLinks)
                 throw std::invalid_argument("Two link section");
             sectionLinks = true;
+            sectionChipsets = false;
+            // std::cout << "Got links" << std::endl;
             continue;
         }
+        //std::cout << sectionChipsets << sectionLinks << line << std::endl;
         if (sectionChipsets) {
             for (std::string regex : chipsets) {
+                //std::cout << regex << std::endl;
                 if (RegUtils::isMatch(line, regex)) {
+                    //std::cout << regex << std::endl;
                     std::smatch smatch = RegUtils::getMatch(line, regex);
                     std::string type = smatch[1].str();
                     std::string val = smatch[2].str();
@@ -101,7 +107,9 @@ void Parser::parse(std::string filename)
                 }
             }
         } else if (sectionLinks) {
+            // std::cout << "Test link" << line << std::endl;
             if (RegUtils::isMatch(line, linkPattern)) {
+                // std::cout << "Got matching " << line << std::endl;
                 std::smatch smatch = RegUtils::getMatch(line, linkPattern);
                 std::string chipsetLink = smatch[1].str();                      //string avec input et link
                 std::string chipset = smatch[2].str();                          //chipset
@@ -110,12 +118,15 @@ void Parser::parse(std::string filename)
                 std::string link = smatch[5].str();                             //link
                 int linkPin = std::stoi(smatch[6].str());                       //pin du link
 
+                (void) linkPin;
+                (void) pin;
                 if (isInVector(chipsetLink, linksInputVec))
                     throw std::invalid_argument("Duplicate link input: " + line);
                 linksInputVec.push_back(chipsetLink);
                 if (isInVector(linkLinkPin, linksOutputVec))
                     throw std::invalid_argument("Duplicate link output: " + line);
                 linksInputVec.push_back(linkLinkPin);
+                continue;
             }
             throw std::invalid_argument("Invalid link: " + line);
         }

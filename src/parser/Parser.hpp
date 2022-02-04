@@ -12,6 +12,8 @@
 #include <map>
 #include <algorithm>
 
+#include <iostream>
+
 #include "../utils/RegUtils.hpp"
 
 class Parser {
