@@ -15,14 +15,15 @@
 #include <iostream>
 
 #include "../utils/RegUtils.hpp"
+#include "../components/Factory.hpp"
 
 class Parser {
     public:
         Parser() = default;
         ~Parser() = default;
-        static void parse(std::string filename);
-        static std::ifstream checkFile(std::string filename);
-        static bool isInVector(std::string str, std::vector<std::string> vec);
+        static void parse(std::string, nts::Factory);
+        static std::ifstream checkFile(std::string);
+        static bool isInVector(std::string, std::vector<std::string>);
     protected:
     private:
 };

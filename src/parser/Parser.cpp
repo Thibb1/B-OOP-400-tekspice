@@ -25,7 +25,7 @@ bool Parser::isInVector(std::string str, std::vector<std::string> vec)
     return std::find(vec.begin(), vec.end(), str) != vec.end();
 }
 
-void Parser::parse(std::string filename)
+void Parser::parse(std::string filename, nts::Factory factory)
 {
     std::ifstream file = checkFile(filename);
     // std::ifstream file(filename);
