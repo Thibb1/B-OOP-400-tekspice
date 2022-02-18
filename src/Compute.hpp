@@ -7,15 +7,16 @@
 
 #pragma once
 
-#include "Factory.hpp"
-#include "../utils/RegUtils.hpp"
+#include "components/Factory.hpp"
+#include "utils/RegUtils.hpp"
 
 namespace nts {
     class Compute {
         public:
             Compute() = default;
             ~Compute() = default;
-            static void Run(nts::Factory factory);
+            static void Run(Factory);
+            static void Display(Factory, std::size_t);
         protected:
         private:
     };

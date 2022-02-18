@@ -12,16 +12,21 @@
 #include <memory>
 
 #include "AComponent.hpp"
+#include "chipsets/CInput.hpp"
+#include "chipsets/COutput.hpp"
 
 namespace nts {
     class Factory {
         public:
             Factory();
             ~Factory() = default;
-            void AddComponent(std::string const &type, std::string const &value);
-            nts::AComponent GetComponent(std::string const &type);
+            std::unique_ptr<IComponent> createComponent(const std::string &type);
+            void AddChipset(const std::string &name, std::string const &key);
+            std::shared_ptr<nts::IComponent> GetChipset(const std::string &name);
+            std::map<std::string, std::shared_ptr<IComponent>> GetChipsets();
         protected:
         private:
-            std::map<std::string, std::unique_ptr<AComponent>> _components;
+            std::map<std::string, std::unique_ptr<IComponent>> _chipsetFactory;
+            std::map<std::string, std::shared_ptr<IComponent>> _chipsets;
     };
 }
