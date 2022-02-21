@@ -1,11 +1,12 @@
 /*
 ** EPITECH PROJECT, 2022
-** /home/thibb1/Documents
+** tekspice
 ** File description:
-** IComponent.hpp
+** IComponent
 */
 
-#pragma once
+#ifndef ICOMPONENT_HPP_
+#define ICOMPONENT_HPP_
 
 #include <iostream>
 
@@ -29,3 +30,4 @@ namespace nts {
     #define IS_UNDEFINED(nts) ((nts) == UNDEFINED)
 }
 
+#endif /* !ICOMPONENT_HPP_ */

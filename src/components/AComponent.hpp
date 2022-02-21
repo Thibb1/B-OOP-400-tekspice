@@ -5,7 +5,8 @@
 ** AComponent
 */
 
-#pragma once
+#ifndef ACOMPONENT_HPP_
+#define ACOMPONENT_HPP_
 
 #include <map>
 #include <vector>
@@ -13,7 +14,6 @@
 #include "IComponent.hpp"
 
 namespace nts {
-    size_t MAX_CYCLE = 10000;
     class AComponent : public IComponent {
         public:
             virtual ~AComponent() = default;
@@ -26,7 +26,10 @@ namespace nts {
         protected:
             nts::Tristate _value = UNDEFINED;
             size_t _nbPin = 3;
-            std::map<size_t, std::pair<size_t, IComponent &>> _links;
+            std::map<size_t, IComponent *> _links;
+            std::map<size_t, size_t> _linksPin;
             size_t _cycle = 0;
     };
 }
+
+#endif /* !ACOMPONENT_HPP_ */

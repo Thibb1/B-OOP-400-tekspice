@@ -5,9 +5,10 @@
 ** COutput
 */
 
-#pragma once
+#ifndef COUTPUT_HPP_
+#define COUTPUT_HPP_
 
-#include "../AComponent.hpp"
+#include "AComponent.hpp"
 
 namespace nts {
     class COutput : public AComponent {
@@ -22,3 +23,5 @@ namespace nts {
         private:
     };
 }
+
+#endif /* !COUTPUT_HPP_ */

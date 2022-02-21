@@ -39,8 +39,6 @@ void Parser::parseLink(std::string line, nts::Factory factory)
         std::string link = smatch[5].str();                             //link
         int linkPin = std::stoi(smatch[6].str());                       //pin du link
 
-        (void) linkPin;
-        (void) pin;
         if (isInVector(chipsetLink, linksInputVec))
             throw std::invalid_argument("Duplicate link input: " + line);
         linksInputVec.push_back(chipsetLink);
@@ -49,7 +47,7 @@ void Parser::parseLink(std::string line, nts::Factory factory)
         linksInputVec.push_back(linkLinkPin);
         auto chipsetInput = factory.GetChipset(chipset);
         auto chipsetOutput = factory.GetChipset(link);
-        chipsetInput->setLink(pin, *chipsetOutput.get(), linkPin);
+        chipsetInput->setLink(pin, *chipsetOutput, linkPin);
         return;
     }
     throw std::invalid_argument("Invalid link: " + line);

@@ -1,11 +1,12 @@
 /*
 ** EPITECH PROJECT, 2022
-** /home/thibb1/Documents/tekspice
+** tekspice
 ** File description:
-** RegUtil.hpp
+** RegUtils
 */
 
-#pragma once
+#ifndef REGUTILS_HPP_
+#define REGUTILS_HPP_
 
 #include <string>
 #include <regex>
@@ -19,3 +20,5 @@ class RegUtils {
     protected:
     private:
 };
+
+#endif /* !REGUTILS_HPP_ */

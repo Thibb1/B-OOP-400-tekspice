@@ -5,11 +5,7 @@
 ** main
 */
 
-#include <iostream>
-#include "src/utils/RegUtils.hpp"
-#include "src/parser/Parser.hpp"
-#include "src/components/Factory.hpp"
-#include "src/Compute.hpp"
+#include "Tekspice.hpp"
 
 int main(int ac, char **av)
 {

@@ -1,11 +1,12 @@
 /*
 ** EPITECH PROJECT, 2022
-** /home/hugo/Epitech/tekspice
+** tekspice
 ** File description:
-** RegUtil.hpp
+** Parser
 */
 
-#pragma once
+#ifndef PARSER_HPP_
+#define PARSER_HPP_
 
 #include <fstream>
 #include <vector>
@@ -14,8 +15,8 @@
 
 #include <iostream>
 
-#include "../utils/RegUtils.hpp"
-#include "../components/Factory.hpp"
+#include "RegUtils.hpp"
+#include "Factory.hpp"
 
 class Parser {
     public:
@@ -29,3 +30,5 @@ class Parser {
     protected:
     private:
 };
+
+#endif /* !PARSER_HPP_ */

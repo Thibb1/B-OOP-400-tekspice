@@ -2,10 +2,11 @@
 ** EPITECH PROJECT, 2022
 ** tekspice
 ** File description:
-** Input
+** CInput
 */
 
-#pragma once
+#ifndef CINPUT_HPP_
+#define CINPUT_HPP_
 
 #include "../AComponent.hpp"
 
@@ -22,3 +23,5 @@ namespace nts {
         private:
     };
 }
+
+#endif /* !CINPUT_HPP_ */

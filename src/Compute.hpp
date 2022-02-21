@@ -5,10 +5,11 @@
 ** Compute
 */
 
-#pragma once
+#ifndef COMPUTE_HPP_
+#define COMPUTE_HPP_
 
-#include "components/Factory.hpp"
-#include "utils/RegUtils.hpp"
+#include "Factory.hpp"
+#include "RegUtils.hpp"
 
 namespace nts {
     class Compute {
@@ -21,3 +22,5 @@ namespace nts {
         private:
     };
 }
+
+#endif /* !COMPUTE_HPP_ */

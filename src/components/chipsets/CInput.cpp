@@ -11,6 +11,10 @@ nts::CInput::CInput()
 {
 }
 
+nts::CInput::~CInput()
+{
+}
+
 nts::CInput *nts::CInput::clone() const
 {
     return new CInput();
@@ -18,6 +22,7 @@ nts::CInput *nts::CInput::clone() const
 
 void nts::CInput::simulate(std::size_t tick)
 {
+    (void) tick;
     return;
 }
 
