@@ -13,10 +13,14 @@
 #include <string>
 #include <map>
 #include <memory>
+#include <functional>
 
 #include "AComponent.hpp"
-#include "chipsets/CInput.hpp"
-#include "chipsets/COutput.hpp"
+#include "CInput.hpp"
+#include "COutput.hpp"
+#include "CClock.hpp"
+#include "CFalse.hpp"
+#include "CTrue.hpp"
 
 namespace nts {
     class Factory {
@@ -25,12 +29,15 @@ namespace nts {
             ~Factory() = default;
             std::unique_ptr<IComponent> createComponent(const std::string &type);
             void AddChipset(const std::string &name, std::string const &key);
-            IComponent *GetChipset(const std::string &name);
-            std::map<std::string, IComponent *> GetChipsets();
+            nts::IComponent *GetChipset(const std::string &name);
+            std::map<std::string, std::string> GetChipsetsTypes();
         protected:
         private:
-            std::map<std::string, IComponent *> _chipsetFactory;
-            std::map<std::string, IComponent *> _chipsets;
+            std::map<std::string, std::function<std::unique_ptr<IComponent>()>> _chipsetFactory;
+            std::map<std::string, std::unique_ptr<IComponent>> _chipsets;
+            std::map<std::string, std::string> _chipsetsTypes;
+            std::unique_ptr<IComponent> createCInput() const;
+            std::unique_ptr<IComponent> createCOutput() const;
     };
 }
 

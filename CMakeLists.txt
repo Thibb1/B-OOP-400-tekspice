@@ -29,6 +29,9 @@ set(SRC_FILES   TekSpice.cpp
                 src/components/AComponent.cpp
                 src/components/chipsets/CInput.cpp
                 src/components/chipsets/COutput.cpp
+                src/components/chipsets/CClock.cpp
+                src/components/chipsets/CFalse.cpp
+                src/components/chipsets/CTrue.cpp
                 )
 
 # include directories

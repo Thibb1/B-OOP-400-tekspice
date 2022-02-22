@@ -14,15 +14,15 @@
 #include "IComponent.hpp"
 
 namespace nts {
-    class AComponent : public IComponent {
+    class AComponent : public nts::IComponent {
         public:
             virtual ~AComponent() = default;
 
             virtual Tristate compute(size_t pin) = 0;
-            virtual Tristate getPins(size_t pin);
             virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin);
-            virtual void dump() const = 0;
+            virtual void dump() const;
             virtual void reset();
+            virtual void setValue(Tristate);
         protected:
             nts::Tristate _value = UNDEFINED;
             size_t _nbPin = 3;

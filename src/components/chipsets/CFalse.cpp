@@ -2,25 +2,26 @@
 ** EPITECH PROJECT, 2022
 ** tekspice
 ** File description:
-** Input
+** CFalse
 */
 
-#include "CInput.hpp"
+#include "CFalse.hpp"
 
-nts::CInput::CInput()
+nts::CFalse::CFalse()
+{
+    _value = FALSE;
+}
+
+nts::CFalse::~CFalse()
 {
 }
 
-nts::CInput::~CInput()
-{
-}
-
-void nts::CInput::simulate(std::size_t tick)
+void nts::CFalse::simulate(std::size_t tick)
 {
     (void) tick;
 }
 
-nts::Tristate nts::CInput::compute(std::size_t pin)
+nts::Tristate nts::CFalse::compute(std::size_t pin)
 {
     if (pin != 1)
         throw std::runtime_error("PinError: pin out of range");

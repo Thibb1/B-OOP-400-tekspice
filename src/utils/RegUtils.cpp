@@ -20,3 +20,9 @@ std::smatch RegUtils::getMatch(std::string const &str, std::string const &patter
     std::regex_search(str, match, reg);
     return match;
 }
+
+std::string RegUtils::removeSpaces(std::string const &str)
+{
+    std::regex reg("\\s*");
+    return std::regex_replace(str, reg, "");
+}

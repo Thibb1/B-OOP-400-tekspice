@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2022
 ** tekspice
 ** File description:
-** COutput
+** CClock
 */
 
-#ifndef COUTPUT_HPP_
-#define COUTPUT_HPP_
+#ifndef CCLOCK_HPP_
+#define CCLOCK_HPP_
 
 #include "AComponent.hpp"
 
 namespace nts {
-    class COutput : public AComponent {
+    class CClock : public AComponent {
         public:
-            COutput();
-            ~COutput();
+            CClock();
+            ~CClock();
             Tristate compute(size_t pin = 1);
             void simulate(std::size_t tick);
         protected:
@@ -22,4 +22,4 @@ namespace nts {
     };
 }
 
-#endif /* !COUTPUT_HPP_ */
+#endif /* !CCLOCK_HPP_ */

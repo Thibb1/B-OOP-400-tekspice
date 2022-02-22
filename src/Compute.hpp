@@ -8,19 +8,31 @@
 #ifndef COMPUTE_HPP_
 #define COMPUTE_HPP_
 
+#include <csignal>
 #include "Factory.hpp"
 #include "RegUtils.hpp"
 
 namespace nts {
     class Compute {
         public:
-            Compute() = default;
+            Compute(nts::Factory *);
             ~Compute() = default;
-            static void Run(Factory);
-            static void Display(Factory, std::size_t);
+            void Run();
+            void Display();
+            void Simulate();
+            void Loop();
+            void AddChange(std::string const &);
+            static void StopSignal(int);
         protected:
         private:
+            std::size_t _ticks;
+            std::map<std::string, IComponent *> _inputs;
+            std::map<std::string, IComponent *> _outputs;
+            std::map<std::string, Tristate> _values;
+            std::map<std::string, std::string> _chipsets;
     };
+    #define GET_TRISTATE(nts) ((nts) == "U" ? UNDEFINED : ((nts) == "1" ? TRUE : FALSE))
 }
+
 
 #endif /* !COMPUTE_HPP_ */

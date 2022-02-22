@@ -22,9 +22,9 @@ class Parser {
     public:
         Parser() = default;
         ~Parser() = default;
-        static void parse(std::string, nts::Factory);
-        static void parseLink(std::string, nts::Factory);
-        static void parseChipset(std::string, nts::Factory);
+        static void parse(std::string, nts::Factory *);
+        static void parseLink(std::string, nts::Factory *);
+        static void parseChipset(std::string, nts::Factory *);
         static std::ifstream checkFile(std::string);
         static bool isInVector(std::string, std::vector<std::string>);
     protected:

@@ -25,7 +25,7 @@ namespace nts {
             virtual Tristate compute(std::size_t pin) = 0;
             virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
             virtual void dump() const = 0;
-            virtual IComponent *clone() const = 0;
+            virtual void setValue(Tristate) = 0;
     };
     #define IS_UNDEFINED(nts) ((nts) == UNDEFINED)
 }

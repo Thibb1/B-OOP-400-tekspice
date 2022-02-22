@@ -13,13 +13,13 @@ int main(int ac, char **av)
     (void) av;
     try {
         nts::Factory factory;
-        std::cout << "Test 1: " << std::endl;
         Parser::parse(
             // "asset/B-OOP-400_nanotekspicezip/nts_single/2716_rom.nts",
             "test.nts",
-            factory
+            &factory
         );
-        nts::Compute::Run(factory);
+        nts::Compute computer(&factory);
+        computer.Run();
     } catch (const std::exception &e) {
         std::cerr << e.what() << std::endl;
         return 84;

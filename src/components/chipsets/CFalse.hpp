@@ -2,19 +2,19 @@
 ** EPITECH PROJECT, 2022
 ** tekspice
 ** File description:
-** COutput
+** CFalse
 */
 
-#ifndef COUTPUT_HPP_
-#define COUTPUT_HPP_
+#ifndef CFALSE_HPP_
+#define CFALSE_HPP_
 
 #include "AComponent.hpp"
 
 namespace nts {
-    class COutput : public AComponent {
+    class CFalse : public AComponent {
         public:
-            COutput();
-            ~COutput();
+            CFalse();
+            ~CFalse();
             Tristate compute(size_t pin = 1);
             void simulate(std::size_t tick);
         protected:
@@ -22,4 +22,4 @@ namespace nts {
     };
 }
 
-#endif /* !COUTPUT_HPP_ */
+#endif /* !CFALSE_HPP_ */

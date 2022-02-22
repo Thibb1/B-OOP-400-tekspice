@@ -17,6 +17,7 @@ class RegUtils {
         ~RegUtils() = default;
         static bool isMatch(std::string const &str, std::string const &pattern);
         static std::smatch getMatch(std::string const &str, std::string const &pattern);
+        static std::string removeSpaces(std::string const &str);
     protected:
     private:
 };

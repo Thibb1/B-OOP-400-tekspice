@@ -5,3 +5,5 @@
 .vscode
 !CMakeLists.txt
 build
+test.nts
+nanotekspice

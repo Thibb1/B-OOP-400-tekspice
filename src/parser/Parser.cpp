@@ -25,7 +25,7 @@ bool Parser::isInVector(std::string str, std::vector<std::string> vec)
     return std::find(vec.begin(), vec.end(), str) != vec.end();
 }
 
-void Parser::parseLink(std::string line, nts::Factory factory)
+void Parser::parseLink(std::string line, nts::Factory *factory)
 {
     std::string linkPattern = "^((\\w+):(\\d+)) ((\\w+):(\\d+))$";
     static std::vector<std::string> linksInputVec;
@@ -45,15 +45,16 @@ void Parser::parseLink(std::string line, nts::Factory factory)
         if (isInVector(linkLinkPin, linksOutputVec))
             throw std::invalid_argument("Duplicate link output: " + line);
         linksInputVec.push_back(linkLinkPin);
-        auto chipsetInput = factory.GetChipset(chipset);
-        auto chipsetOutput = factory.GetChipset(link);
-        chipsetInput->setLink(pin, *chipsetOutput, linkPin);
+        auto chipsetInput = factory->GetChipset(chipset);
+        auto chipsetOutput = factory->GetChipset(link);
+        std::cout << "Link: " << chipsetInput << " " << chipsetOutput << std::endl;
+        chipsetOutput->setLink(linkPin, *chipsetInput, pin);
         return;
     }
     throw std::invalid_argument("Invalid link: " + line);
 }
 
-void Parser::parseChipset(std::string line, nts::Factory factory)
+void Parser::parseChipset(std::string line, nts::Factory *factory)
 {
     static std::vector<std::string> chipsetsVec;
     const std::string wordPattern = " ([\\w]+)$";
@@ -85,20 +86,22 @@ void Parser::parseChipset(std::string line, nts::Factory factory)
         "^(and)" + wordPattern,
     };
     for (std::string pattern : chipsetsPatterns) {
-            std::smatch smatch = RegUtils::getMatch(line, pattern);
+        if (!RegUtils::isMatch(line, pattern))
+            continue;
+        std::smatch smatch = RegUtils::getMatch(line, pattern);
         std::string type = smatch[1].str();
         std::string name = smatch[2].str();
 
         if (isInVector(name, chipsetsVec))
             throw std::invalid_argument("Duplicate link name: " + name);
         chipsetsVec.push_back(name);
-        factory.AddChipset(name, type);
+        factory->AddChipset(name, type);
         return;
     }
     throw std::invalid_argument("Invalid chipset: " + line);
 }
 
-void Parser::parse(std::string filename, nts::Factory factory)
+void Parser::parse(std::string filename, nts::Factory *factory)
 {
     std::ifstream file = checkFile(filename);
     std::string line;
@@ -106,9 +109,10 @@ void Parser::parse(std::string filename, nts::Factory factory)
     bool sectionLinks = false;
 
     while (getline(file, line)) {
+        std::cout << line << std::endl;
         if (line.empty() || line[0] == '#')
             continue;
-        if (!RegUtils::isMatch(line, "^\\.chipsets:$")) {
+        if (RegUtils::isMatch(line, "^\\.chipsets:$")) {
             if (sectionChipsets)
                 throw std::invalid_argument("Two chipset section");
             if (sectionLinks)
@@ -135,7 +139,3 @@ void Parser::parse(std::string filename, nts::Factory factory)
         throw std::invalid_argument("Invalid nts: " + line);
     }
 }
-
-//pas de chipset, on affiche une erreur et on quitte
-//si pas de links, pas genant
-//pas de .liks ou .chipset, on exit car errueur de fichier
