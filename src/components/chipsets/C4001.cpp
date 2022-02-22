@@ -9,15 +9,15 @@
 
 nts::C4001::C4001()
 {
+    _nbPin = 14;
 }
 
 nts::C4001::~C4001()
 {
 }
 
-void nts::C4001::simulate(size_t tick)
+void nts::C4001::simulate(size_t [[maybe_unused]] tick)
 {
-    (void) tick;
     if IS_UNDEFINED(_value)
         return;
     else
@@ -26,7 +26,21 @@ void nts::C4001::simulate(size_t tick)
 
 nts::Tristate nts::C4001::compute(size_t pin)
 {
-    if (pin != 1)
-        throw std::runtime_error("PinError: pin out of range");
-    return _value;
+    switch (pin) {
+        case 3:
+            // implement NOR gate
+            return TRUE;
+        case 4:
+            // implement NOR gate
+            return TRUE;
+        case 10:
+            // implement NOR gate
+            return TRUE;
+        case 11:
+            // implement NOR gate
+            return TRUE;
+        default:
+            throw std::out_of_range("Pin out of range");
+    }
+    return UNDEFINED;
 }
