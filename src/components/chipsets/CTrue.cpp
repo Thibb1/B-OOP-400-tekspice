@@ -16,12 +16,12 @@ nts::CTrue::~CTrue()
 {
 }
 
-void nts::CTrue::simulate(std::size_t tick)
+void nts::CTrue::simulate(size_t tick)
 {
     (void) tick;
 }
 
-nts::Tristate nts::CTrue::compute(std::size_t pin)
+nts::Tristate nts::CTrue::compute(size_t pin)
 {
     if (pin != 1)
         throw std::runtime_error("PinError: pin out of range");

@@ -16,7 +16,7 @@ namespace nts {
             CTrue();
             ~CTrue();
             Tristate compute(size_t pin = 1);
-            void simulate(std::size_t tick);
+            void simulate(size_t tick);
         protected:
         private:
     };

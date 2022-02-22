@@ -15,12 +15,12 @@ nts::CInput::~CInput()
 {
 }
 
-void nts::CInput::simulate(std::size_t tick)
+void nts::CInput::simulate(size_t tick)
 {
     (void) tick;
 }
 
-nts::Tristate nts::CInput::compute(std::size_t pin)
+nts::Tristate nts::CInput::compute(size_t pin)
 {
     if (pin != 1)
         throw std::runtime_error("PinError: pin out of range");

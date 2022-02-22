@@ -15,7 +15,7 @@ nts::COutput::~COutput()
 {
 }
 
-void nts::COutput::simulate(std::size_t tick)
+void nts::COutput::simulate(size_t tick)
 {
     ++_cycle;
     if (_cycle > 10000 || !tick || tick > _links.size()) {
@@ -25,7 +25,7 @@ void nts::COutput::simulate(std::size_t tick)
     setValue(_links[tick]->compute(_linksPin[tick]));
 }
 
-nts::Tristate nts::COutput::compute(std::size_t pin)
+nts::Tristate nts::COutput::compute(size_t pin)
 {
     if (pin != 1)
         throw std::runtime_error("PinError: pin out of range");
