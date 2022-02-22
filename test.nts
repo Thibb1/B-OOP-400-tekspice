@@ -1,6 +1,0 @@
-.chipsets:
-input input_one
-output output_one
-
-.links:
-input_one:1 output_one:1
