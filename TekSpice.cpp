@@ -9,13 +9,12 @@
 
 int main(int ac, char **av)
 {
-    (void) ac;
-    (void) av;
+    if (ac != 2)
+        return 84;
     try {
         nts::Factory factory;
         Parser::parse(
-            // "asset/B-OOP-400_nanotekspicezip/nts_single/2716_rom.nts",
-            "test.nts",
+            av[1],
             &factory
         );
         nts::Compute computer(&factory);

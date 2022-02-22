@@ -16,8 +16,9 @@ nts::C4001::~C4001()
 {
 }
 
-void nts::C4001::simulate(size_t [[maybe_unused]] tick)
+void nts::C4001::simulate(size_t tick)
 {
+    (void) tick;
     if IS_UNDEFINED(_value)
         return;
     else

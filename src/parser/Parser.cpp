@@ -47,7 +47,6 @@ void Parser::parseLink(std::string line, nts::Factory *factory)
         linksInputVec.push_back(linkLinkPin);
         auto chipsetInput = factory->GetChipset(chipset);
         auto chipsetOutput = factory->GetChipset(link);
-        std::cout << "Link: " << chipsetInput << " " << chipsetOutput << std::endl;
         chipsetOutput->setLink(linkPin, *chipsetInput, pin);
         return;
     }
@@ -109,7 +108,7 @@ void Parser::parse(std::string filename, nts::Factory *factory)
     bool sectionLinks = false;
 
     while (getline(file, line)) {
-        std::cout << line << std::endl;
+        // std::cout << line << std::endl;
         if (line.empty() || line[0] == '#')
             continue;
         if (RegUtils::isMatch(line, "^\\.chipsets:$")) {
