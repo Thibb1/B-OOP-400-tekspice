@@ -32,6 +32,27 @@ set(SRC_FILES   TekSpice.cpp
                 src/components/chipsets/CClock.cpp
                 src/components/chipsets/CFalse.cpp
                 src/components/chipsets/CTrue.cpp
+                src/components/chipsets/C4001.cpp
+                #src/components/chipsets/C4008.cpp
+                #src/components/chipsets/C4011.cpp
+                #src/components/chipsets/C4013.cpp
+                #src/components/chipsets/C4011.cpp
+                #src/components/chipsets/C4017.cpp
+                #src/components/chipsets/C4030.cpp
+                #src/components/chipsets/C4040.cpp
+                #src/components/chipsets/C4069.cpp
+                #src/components/chipsets/C4071.cpp
+                #src/components/chipsets/C4081.cpp
+                #src/components/chipsets/C4094.cpp
+                #src/components/chipsets/C4512.cpp
+                #src/components/chipsets/C4514.cpp
+                #src/components/chipsets/C4801.cpp
+                #src/components/chipsets/C2716.cpp
+                #src/components/chipsets/logger.cpp
+                #src/components/chipsets/bad.cpp
+                #src/components/chipsets/altered-counter.cpp
+                #src/components/chipsets/and-or-not.cpp
+                #src/components/chipsets/and.cpp
                 )
 
 # include directories
