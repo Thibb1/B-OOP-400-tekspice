@@ -17,7 +17,7 @@ nts::Factory::Factory()
     _chipsetFactory["4001"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4001>(); };
     _chipsetFactory["4008"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4008>(); };
     _chipsetFactory["4011"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4011>(); };
-    // _chipsetFactory["4013"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4013>(); };
+    _chipsetFactory["4013"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4013>(); };
     // _chipsetFactory["4017"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4017>(); };
     _chipsetFactory["4030"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4030>(); };
     // _chipsetFactory["4040"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4040>(); };
