@@ -11,7 +11,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "IComponent.hpp"
+#include "Gate.hpp"
 
 namespace nts {
     class AComponent : public nts::IComponent {
@@ -19,12 +19,12 @@ namespace nts {
             virtual ~AComponent() = default;
 
             virtual Tristate compute(size_t pin) = 0;
-            virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin);
+            virtual void setLink(size_t pin, IComponent &other, size_t otherPin);
             virtual void dump() const;
             virtual void reset();
             virtual void setValue(Tristate);
         protected:
-            nts::Tristate _value = UNDEFINED;
+            Tristate _value = UNDEFINED;
             size_t _nbPin = 3;
             std::map<size_t, IComponent *> _links;
             std::map<size_t, size_t> _linksPin;

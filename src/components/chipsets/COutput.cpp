@@ -18,6 +18,7 @@ nts::COutput::~COutput()
 void nts::COutput::simulate(size_t tick)
 {
     ++_cycle;
+    std::cout << ": tick: " << tick << ": " << _linksPin[tick] << std::endl;
     if (_cycle > 10000 || !tick || tick > _links.size()) {
         setValue(UNDEFINED);
         return;

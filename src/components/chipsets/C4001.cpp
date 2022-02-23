@@ -19,27 +19,19 @@ nts::C4001::~C4001()
 void nts::C4001::simulate(size_t tick)
 {
     (void) tick;
-    if IS_UNDEFINED(_value)
-        return;
-    else
-        setValue(_value == TRUE ? FALSE : TRUE);
 }
 
 nts::Tristate nts::C4001::compute(size_t pin)
 {
     switch (pin) {
         case 3:
-            // implement NOR gate
-            return TRUE;
+            return Gate::Nor(_links[1]->compute(_linksPin[1]), _links[2]->compute(_linksPin[2]));
         case 4:
-            // implement NOR gate
-            return TRUE;
+            return Gate::Nor(_links[5]->compute(_linksPin[5]), _links[6]->compute(_linksPin[6]));
         case 10:
-            // implement NOR gate
-            return TRUE;
+            return Gate::Nor(_links[8]->compute(_linksPin[8]), _links[9]->compute(_linksPin[9]));
         case 11:
-            // implement NOR gate
-            return TRUE;
+            return Gate::Nor(_links[12]->compute(_linksPin[12]), _links[13]->compute(_linksPin[13]));
         default:
             throw std::out_of_range("Pin out of range");
     }

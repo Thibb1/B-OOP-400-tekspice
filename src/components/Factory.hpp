@@ -30,7 +30,7 @@
 // #include "C4040.hpp"
 // #include "C4069.hpp"
 // #include "C4071.hpp"
-// #include "C4081.hpp"œ
+// #include "C4081.hpp"
 // #include "C4094.hpp"
 // #include "C4514.hpp"
 // #include "C4801.hpp"
@@ -58,8 +58,6 @@ namespace nts {
             std::map<std::string, std::function<std::unique_ptr<IComponent>()>> _chipsetFactory;
             std::map<std::string, std::unique_ptr<IComponent>> _chipsets;
             std::map<std::string, std::string> _chipsetsTypes;
-            std::unique_ptr<IComponent> createCInput() const;
-            std::unique_ptr<IComponent> createCOutput() const;
     };
 }
 
