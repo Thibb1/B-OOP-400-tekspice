@@ -42,8 +42,8 @@ set(SRC_FILES   TekSpice.cpp
                 src/components/chipsets/C4030.cpp
                 #src/components/chipsets/C4040.cpp
                 src/components/chipsets/C4069.cpp
-                #src/components/chipsets/C4071.cpp
-                #src/components/chipsets/C4081.cpp
+                src/components/chipsets/C4071.cpp
+                src/components/chipsets/C4081.cpp
                 #src/components/chipsets/C4094.cpp
                 #src/components/chipsets/C4512.cpp
                 #src/components/chipsets/C4514.cpp
