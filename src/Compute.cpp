@@ -48,7 +48,6 @@ void nts::Compute::Simulate()
         _values.erase(new_val.first);
     }
     for (auto &output : _outputs) {
-        std::cout << output.first;
         output.second->simulate(1);
     }
 }
