@@ -15,11 +15,6 @@ nts::CInput::~CInput()
 {
 }
 
-void nts::CInput::simulate(size_t tick)
-{
-    (void) tick;
-}
-
 nts::Tristate nts::CInput::compute(size_t pin)
 {
     if (pin != 1)

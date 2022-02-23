@@ -17,7 +17,6 @@ namespace nts {
             C4001();
             ~C4001();
             Tristate compute(size_t pin = 1);
-            void simulate(size_t tick);
         protected:
         private:
     };

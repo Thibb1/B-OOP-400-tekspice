@@ -16,11 +16,6 @@ nts::CFalse::~CFalse()
 {
 }
 
-void nts::CFalse::simulate(size_t tick)
-{
-    (void) tick;
-}
-
 nts::Tristate nts::CFalse::compute(size_t pin)
 {
     if (pin != 1)

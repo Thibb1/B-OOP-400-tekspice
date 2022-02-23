@@ -16,11 +16,6 @@ nts::C4069::~C4069()
 {
 }
 
-void nts::C4069::simulate(size_t tick)
-{
-    (void) tick;
-}
-
 nts::Tristate nts::C4069::compute(size_t pin)
 {
     switch (pin) {

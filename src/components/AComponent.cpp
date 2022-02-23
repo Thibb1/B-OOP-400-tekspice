@@ -32,3 +32,8 @@ void nts::AComponent::dump() const
     else
         std::cout << _value << std::endl;
 }
+
+void nts::AComponent::simulate(size_t tick)
+{
+    (void) tick;
+}

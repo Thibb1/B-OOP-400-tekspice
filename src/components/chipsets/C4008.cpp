@@ -16,11 +16,6 @@ nts::C4008::~C4008()
 {
 }
 
-void nts::C4008::simulate(size_t tick)
-{
-    (void) tick;
-}
-
 nts::Tristate nts::C4008::computeSum(nts::Tristate a, nts::Tristate b, nts::Tristate c)
 {
     if (a == UNDEFINED || b == UNDEFINED || c == UNDEFINED)

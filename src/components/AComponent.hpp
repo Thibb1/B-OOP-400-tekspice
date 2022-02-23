@@ -17,8 +17,8 @@ namespace nts {
     class AComponent : public nts::IComponent {
         public:
             virtual ~AComponent() = default;
-
             virtual Tristate compute(size_t pin) = 0;
+            virtual void simulate(std::size_t tick);
             virtual void setLink(size_t pin, IComponent &other, size_t otherPin);
             virtual void dump() const;
             virtual void reset();
