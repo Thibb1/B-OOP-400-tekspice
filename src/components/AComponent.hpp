@@ -12,6 +12,7 @@
 #include <vector>
 #include <algorithm>
 #include "Gate.hpp"
+#include "FlipFlop.hpp"
 
 namespace nts {
     class AComponent : public nts::IComponent {

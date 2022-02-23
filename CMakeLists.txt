@@ -28,6 +28,7 @@ set(SRC_FILES   TekSpice.cpp
                 src/components/Factory.cpp
                 src/components/AComponent.cpp
                 src/components/Gate.cpp
+                src/components/FlipFlop.cpp
                 src/components/chipsets/CInput.cpp
                 src/components/chipsets/COutput.cpp
                 src/components/chipsets/CClock.cpp

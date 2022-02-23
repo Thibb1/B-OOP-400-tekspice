@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2022
 ** NanoTekSpace
 ** File description:
-** C4001
+** C4013
 */
 
 #ifndef C4013_HPP_
@@ -19,6 +19,8 @@ namespace nts {
             Tristate compute(size_t pin = 1);
         protected:
         private:
+            FlipFlop _flipFlop1;
+            FlipFlop _flipFlop2;
     };
 }
 
