@@ -69,7 +69,7 @@ void Parser::parseChipset(std::string line, nts::Factory *factory)
         "^(4011)" + wordPattern,
         "^(4013)" + wordPattern,
         "^(4017)" + wordPattern,
-        "^(4930)" + wordPattern,
+        "^(4030)" + wordPattern,
         "^(4040)" + wordPattern,
         "^(4069)" + wordPattern,
         "^(4071)" + wordPattern,
