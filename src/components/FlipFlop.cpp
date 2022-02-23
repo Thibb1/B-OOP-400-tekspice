@@ -15,9 +15,9 @@ nts::FlipFlop::~FlipFlop()
 {
 }
 
-void nts::FlipFlop::compute(Tristate clock, Tristate reset, Tristate data, Tristate set)
+void nts::FlipFlop::compute(Tristate clock, Tristate data, Tristate set, Tristate reset)
 {
-    if (IS_UNDEFINED(clock) || IS_UNDEFINED(reset) || IS_UNDEFINED(data) || IS_UNDEFINED(set))
+    if (IS_UNDEFINED(clock) || IS_UNDEFINED(reset) || IS_UNDEFINED(set))
         return;
     Tristate current = _clock != TRUE ? clock : FALSE;
     _clock = clock;
@@ -28,6 +28,8 @@ void nts::FlipFlop::compute(Tristate clock, Tristate reset, Tristate data, Trist
         _Q = TRUE;
         _QPrime = TRUE;
     } else {
+        if (IS_UNDEFINED(data))
+            return;
         _Q = current == TRUE ? data : _Q;
         _QPrime = current == TRUE ? Gate::Not(data) : _QPrime;
     }

@@ -20,15 +20,15 @@ nts::Tristate nts::C4013::compute(size_t pin)
 {
     _flipFlop1.compute(
         _links[3]->compute(_linksPin[3]),
-        _links[4]->compute(_linksPin[4]),
         _links[5]->compute(_linksPin[5]),
-        _links[6]->compute(_linksPin[6])
+        _links[6]->compute(_linksPin[6]),
+        _links[4]->compute(_linksPin[4])
     );
     _flipFlop2.compute(
         _links[11]->compute(_linksPin[11]),
-        _links[10]->compute(_linksPin[10]),
         _links[9]->compute(_linksPin[9]),
-        _links[8]->compute(_linksPin[8])
+        _links[8]->compute(_linksPin[8]),
+        _links[10]->compute(_linksPin[10])
     );
     switch (pin) {
         case 1:

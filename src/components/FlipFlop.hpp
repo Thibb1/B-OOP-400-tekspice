@@ -15,7 +15,7 @@ namespace nts {
         public:
             FlipFlop();
             ~FlipFlop();
-            void compute(Tristate, Tristate, Tristate, Tristate);
+            void compute(Tristate, Tristate, Tristate, Tristate = TRUE);
             Tristate GetQ();
             Tristate GetQPrime();
         protected:
