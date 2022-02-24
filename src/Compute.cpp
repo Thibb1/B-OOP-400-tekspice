@@ -49,6 +49,7 @@ void nts::Compute::Simulate()
     }
     for (auto &output : _outputs) {
         output.second->simulate(1);
+        output.second->reset();
     }
 }
 
