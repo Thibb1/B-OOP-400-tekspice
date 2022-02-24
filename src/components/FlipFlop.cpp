@@ -7,7 +7,7 @@
 
 #include "FlipFlop.hpp"
 
-nts::FlipFlop::FlipFlop()
+nts::FlipFlop::FlipFlop(FlipGateType type) : _type(type)
 {
 }
 
@@ -27,11 +27,14 @@ void nts::FlipFlop::compute(Tristate clock, Tristate data, Tristate set, Tristat
     } else if (Gate::Nor(set, reset) == TRUE) {
         _Q = TRUE;
         _QPrime = TRUE;
-    } else {
-        if (IS_UNDEFINED(data))
-            return;
-        _Q = current == TRUE ? data : _Q;
-        _QPrime = current == TRUE ? Gate::Not(data) : _QPrime;
+    } else if (!IS_UNDEFINED(data) && current == TRUE) {
+        if (_type == DFLIP) {
+            _Q = data;
+            _QPrime = Gate::Not(data);
+        } else if (_type == TFLIP) {
+            _QPrime = Gate::Or(Gate::And(data, _QPrime), Gate::And(Gate::Not(data), _Q));
+            _Q = Gate::Not(_QPrime);
+        }
     }
 }
 

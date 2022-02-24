@@ -11,9 +11,14 @@
 #include "Gate.hpp"
 
 namespace nts {
+    enum FlipGateType {
+        DFLIP,
+        TFLIP
+    };
+
     class FlipFlop {
         public:
-            FlipFlop();
+            FlipFlop(FlipGateType = DFLIP);
             ~FlipFlop();
             void compute(Tristate, Tristate, Tristate, Tristate = TRUE);
             Tristate GetQ();
@@ -23,6 +28,7 @@ namespace nts {
             Tristate _clock = UNDEFINED;
             Tristate _Q = UNDEFINED;
             Tristate _QPrime = UNDEFINED;
+            FlipGateType _type;
     };
 }
 
