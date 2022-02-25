@@ -39,10 +39,6 @@
 // #include "C4876.hpp"
 // #include "C2716.hpp"
 // #include "logger.hpp"
-// #include "bad.hpp"
-// #include "altered-counter.hpp"
-// #include "and-or-not.hpp"
-// #include "and.hpp"
 
 namespace nts {
     class Factory {

@@ -30,10 +30,6 @@ nts::Factory::Factory()
     // _chipsetFactory["4801"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C4801>(); };
     // _chipsetFactory["2716"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<C2716>(); };
     // _chipsetFactory["logger"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<Clogger>(); };
-    // _chipsetFactory["bad"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<Cbad>(); };
-    // _chipsetFactory["altered-counter"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<Caltered-counter>(); };
-    // _chipsetFactory["and-or-not"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<Cand-or-not>(); };
-    // _chipsetFactory["and"] = []()->std::unique_ptr<nts::IComponent> { return std::make_unique<Cand>(); };
 }
 
 std::unique_ptr<nts::IComponent> nts::Factory::createComponent(const std::string &type)

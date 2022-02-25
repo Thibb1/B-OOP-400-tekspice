@@ -80,9 +80,6 @@ void Parser::parseChipset(std::string line, nts::Factory *factory)
         "^(false)" + wordPattern,
         "^(logger)" + wordPattern,
         "^(true)" + wordPattern,
-        "^(altered-counter)" + wordPattern,
-        "^(and-or-not)" + wordPattern,
-        "^(and)" + wordPattern,
     };
     for (std::string pattern : chipsetsPatterns) {
         if (!RegUtils::isMatch(line, pattern))
