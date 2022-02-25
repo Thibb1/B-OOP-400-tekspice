@@ -28,9 +28,9 @@ nts::Tristate nts::Gate::Nor(Tristate a, Tristate b)
 
 nts::Tristate nts::Gate::And(Tristate a, Tristate b)
 {
-    if (IS_UNDEFINED(a) || IS_UNDEFINED(b))
-        return UNDEFINED;
-    return (a == TRUE && b == TRUE) ? TRUE : FALSE;
+    if (a == FALSE || b == FALSE)
+        return FALSE;
+    return (a == TRUE && b == TRUE) ? TRUE : UNDEFINED;
 }
 
 nts::Tristate nts::Gate::Xor(Tristate a, Tristate b)
