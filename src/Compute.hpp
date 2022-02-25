@@ -28,6 +28,7 @@ namespace nts {
             std::size_t _ticks;
             std::map<std::string, IComponent *> _inputs;
             std::map<std::string, IComponent *> _outputs;
+            std::unordered_map<std::string, IComponent *> _comps;
             std::map<std::string, Tristate> _values;
             std::map<std::string, std::string> _chipsets;
     };

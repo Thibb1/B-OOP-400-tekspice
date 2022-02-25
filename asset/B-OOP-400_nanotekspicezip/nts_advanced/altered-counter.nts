@@ -31,6 +31,7 @@ input in_reset
 4071 or
 output out_1
 output out_2
+output out_3
 
 .links:
 counter:9 or:5
@@ -43,3 +44,4 @@ counter:11 or:3
 in_reset:1 or:1
 out_1:1 or:4
 out_2:1 or:10
+out_3:1 or:3

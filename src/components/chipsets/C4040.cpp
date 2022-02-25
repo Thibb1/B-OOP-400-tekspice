@@ -16,27 +16,8 @@ nts::C4040::~C4040()
 {
 }
 
-nts::Tristate nts::C4040::compute(size_t pin)
+nts::Tristate nts::C4040::getPin(size_t pin)
 {
-    Tristate cl_clock = _links[10]->compute(_linksPin[10]);
-    Tristate in_reset = _links[11]->compute(_linksPin[11]);
-    if (IS_UNDEFINED(cl_clock) || IS_UNDEFINED(in_reset))
-        return UNDEFINED;
-    Tristate data = Gate::Nor(Gate::Not(cl_clock), in_reset);
-    Tristate clock = Gate::Not(data);
-    Tristate set = Gate::Not(in_reset);
-    _flipFlop_12->compute(_flipFlop_11->GetQPrime(), _flipFlop_11->GetQ(), set);
-    _flipFlop_11->compute(_flipFlop_10->GetQPrime(), _flipFlop_10->GetQ(), set);
-    _flipFlop_10->compute(_flipFlop_09->GetQPrime(), _flipFlop_09->GetQ(), set);
-    _flipFlop_09->compute(_flipFlop_08->GetQPrime(), _flipFlop_08->GetQ(), set);
-    _flipFlop_08->compute(_flipFlop_07->GetQPrime(), _flipFlop_07->GetQ(), set);
-    _flipFlop_07->compute(_flipFlop_06->GetQPrime(), _flipFlop_06->GetQ(), set);
-    _flipFlop_06->compute(_flipFlop_05->GetQPrime(), _flipFlop_05->GetQ(), set);
-    _flipFlop_05->compute(_flipFlop_04->GetQPrime(), _flipFlop_04->GetQ(), set);
-    _flipFlop_04->compute(_flipFlop_03->GetQPrime(), _flipFlop_03->GetQ(), set);
-    _flipFlop_03->compute(_flipFlop_02->GetQPrime(), _flipFlop_02->GetQ(), set);
-    _flipFlop_02->compute(_flipFlop_01->GetQPrime(), _flipFlop_01->GetQ(), set);
-    _flipFlop_01->compute(clock, data, set);
     switch (pin) {
         case 9:
             return _flipFlop_01->GetQ();
@@ -66,4 +47,34 @@ nts::Tristate nts::C4040::compute(size_t pin)
             throw std::out_of_range("Pin out of range");
     }
     return UNDEFINED;
+}
+
+
+nts::Tristate nts::C4040::compute(size_t pin)
+{
+    ++_cycle;
+    if (_cycle >= 1000) {
+        reset();
+        return getPin(pin);
+    }
+    Tristate cl_clock = _links[10]->compute(_linksPin[10]);
+    Tristate in_reset = _links[11]->compute(_linksPin[11]);
+    if (IS_UNDEFINED(cl_clock) || IS_UNDEFINED(in_reset))
+        return UNDEFINED;
+    Tristate data = Gate::Nor(Gate::Not(cl_clock), in_reset);
+    Tristate clock = Gate::Not(data);
+    Tristate set = Gate::Not(in_reset);
+    _flipFlop_01->compute(clock, data, set);
+    _flipFlop_02->compute(_flipFlop_01->GetQPrime(), _flipFlop_01->GetQ(), set);
+    _flipFlop_03->compute(_flipFlop_02->GetQPrime(), _flipFlop_02->GetQ(), set);
+    _flipFlop_04->compute(_flipFlop_03->GetQPrime(), _flipFlop_03->GetQ(), set);
+    _flipFlop_05->compute(_flipFlop_04->GetQPrime(), _flipFlop_04->GetQ(), set);
+    _flipFlop_06->compute(_flipFlop_05->GetQPrime(), _flipFlop_05->GetQ(), set);
+    _flipFlop_07->compute(_flipFlop_06->GetQPrime(), _flipFlop_06->GetQ(), set);
+    _flipFlop_08->compute(_flipFlop_07->GetQPrime(), _flipFlop_07->GetQ(), set);
+    _flipFlop_09->compute(_flipFlop_08->GetQPrime(), _flipFlop_08->GetQ(), set);
+    _flipFlop_10->compute(_flipFlop_09->GetQPrime(), _flipFlop_09->GetQ(), set);
+    _flipFlop_11->compute(_flipFlop_10->GetQPrime(), _flipFlop_10->GetQ(), set);
+    _flipFlop_12->compute(_flipFlop_11->GetQPrime(), _flipFlop_11->GetQ(), set);
+    return getPin(pin);
 }

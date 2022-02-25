@@ -16,14 +16,14 @@ nts::C4008::~C4008()
 {
 }
 
-nts::Tristate nts::C4008::computeSum(nts::Tristate a, nts::Tristate b, nts::Tristate c)
+nts::Tristate nts::C4008::computeSum(Tristate a, Tristate b, Tristate c)
 {
     if (a == UNDEFINED || b == UNDEFINED || c == UNDEFINED)
         return UNDEFINED;
     return Gate::Xor(Gate::Xor(a, b), c);
 }
 
-nts::Tristate nts::C4008::computeComp(nts::Tristate a, nts::Tristate b, nts::Tristate c)
+nts::Tristate nts::C4008::computeCarry(Tristate a, Tristate b, Tristate c)
 {
     if (a == UNDEFINED || b == UNDEFINED || c == UNDEFINED)
         return UNDEFINED;
@@ -42,13 +42,13 @@ nts::Tristate nts::C4008::compute(size_t pin)
     Tristate h = _links[1]->compute(_linksPin[1]);
     Tristate i = _links[15]->compute(_linksPin[15]);
     Tristate s0 = computeSum(a, b, c);
-    Tristate c0 = computeComp(a, b, c);
+    Tristate c0 = computeCarry(a, b, c);
     Tristate s1 = computeSum(c0, d, e);
-    Tristate c1 = computeComp(c0, d, e);
+    Tristate c1 = computeCarry(c0, d, e);
     Tristate s2 = computeSum(c1, f, g);
-    Tristate c2 = computeComp(c1, f, g);
+    Tristate c2 = computeCarry(c1, f, g);
     Tristate s3 = computeSum(c2, h, i);
-    Tristate c3 = computeComp(c2, h, i);
+    Tristate c3 = computeCarry(c2, h, i);
 
     switch (pin) {
         case 10:

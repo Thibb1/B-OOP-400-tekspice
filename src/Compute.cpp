@@ -15,9 +15,10 @@ nts::Compute::Compute(nts::Factory *factory) : _ticks(0)
     for (auto &it : _chipsets) {
         if (RegUtils::isMatch(it.second, "^input$|^clock$")) {
             _inputs[it.first] = factory->GetChipset(it.first);
-        }
-        if (RegUtils::isMatch(it.second, "^output$")) {
+        } else if (RegUtils::isMatch(it.second, "^output$")) {
             _outputs[it.first] = factory->GetChipset(it.first);
+        } else {
+            _comps[it.first] = factory->GetChipset(it.first);
         }
     }
 }
@@ -50,6 +51,9 @@ void nts::Compute::Simulate()
     for (auto &output : _outputs) {
         output.second->simulate(1);
         output.second->reset();
+        for (auto &comp : _comps) {
+            comp.second->reset();
+        }
     }
 }
 

@@ -18,7 +18,7 @@ namespace nts {
             ~C4008();
             Tristate compute(size_t pin = 1);
             Tristate computeSum(Tristate, Tristate, Tristate);
-            Tristate computeComp(Tristate, Tristate, Tristate);
+            Tristate computeCarry(Tristate, Tristate, Tristate);
         protected:
         private:
     };

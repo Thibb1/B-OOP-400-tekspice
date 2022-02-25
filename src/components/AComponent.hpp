@@ -27,8 +27,8 @@ namespace nts {
         protected:
             Tristate _value = UNDEFINED;
             size_t _nbPin = 3;
-            std::map<size_t, IComponent *> _links;
-            std::map<size_t, size_t> _linksPin;
+            std::unordered_map<size_t, IComponent *> _links;
+            std::unordered_map<size_t, size_t> _linksPin;
             size_t _cycle = 0;
     };
 }
