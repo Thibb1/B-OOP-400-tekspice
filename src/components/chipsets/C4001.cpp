@@ -18,6 +18,11 @@ nts::C4001::~C4001()
 
 nts::Tristate nts::C4001::compute(size_t pin)
 {
+    ++_cycle;
+    if (_cycle >= 10000) {
+        reset();
+        return UNDEFINED;
+    }
     switch (pin) {
         case 3:
             return Gate::Nor(_links[1]->compute(_linksPin[1]), _links[2]->compute(_linksPin[2]));
