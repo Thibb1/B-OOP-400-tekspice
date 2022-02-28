@@ -17,17 +17,26 @@ nts::FlipFlop::~FlipFlop()
 
 void nts::FlipFlop::compute(Tristate clock, Tristate data, Tristate set, Tristate reset)
 {
-    if (IS_UNDEFINED(clock) || IS_UNDEFINED(reset) || IS_UNDEFINED(set))
+    if (IS_UNDEFINED(reset) && set == FALSE) {
+        _Q = TRUE;
+        _QPrime = UNDEFINED;
         return;
-    Tristate current = _clock != TRUE ? clock : FALSE;
-    _clock = clock;
+    }
+    if (IS_UNDEFINED(set) && reset == FALSE) {
+        _Q = UNDEFINED;
+        _QPrime = TRUE;
+        return;
+    }
     if (Gate::Xor(set, reset) == TRUE) {
         _Q = set;
-        _QPrime = reset;
+        _QPrime = IS_UNDEFINED(clock) && reset == TRUE ? UNDEFINED : reset;
     } else if (Gate::Nor(set, reset) == TRUE) {
         _Q = TRUE;
         _QPrime = TRUE;
-    } else if (!IS_UNDEFINED(data) && current == TRUE) {
+    }
+    Tristate current = _clock != TRUE ? clock : FALSE;
+    _clock = clock;
+    if (Gate::And(set, reset) == TRUE && current == TRUE) {
         if (_type == DFLIP) {
             _Q = data;
             _QPrime = Gate::Not(data);

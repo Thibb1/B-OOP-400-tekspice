@@ -16,6 +16,22 @@ nts::C4017::~C4017()
 {
 }
 
+void nts::C4017::simulate(size_t pin)
+{
+    (void) pin;
+    _values[3] = Gate::Nor(_flipFlop5.GetQ(), _flipFlop1.GetQ());
+    _values[2] = Gate::Nor(_flipFlop2.GetQ(), _flipFlop1.GetQPrime());
+    _values[4] = Gate::Nor(_flipFlop2.GetQPrime(), _flipFlop3.GetQ());
+    _values[7] = Gate::Nor(_flipFlop4.GetQ(), _flipFlop3.GetQPrime());
+    _values[10] = Gate::Nor(_flipFlop5.GetQ(), _flipFlop4.GetQPrime());
+    _values[11] = Gate::Nor(_flipFlop1.GetQPrime(), _flipFlop5.GetQPrime());
+    _values[5] = Gate::Nor(_flipFlop1.GetQ(), _flipFlop2.GetQPrime());
+    _values[6] = Gate::Nor(_flipFlop2.GetQ(), _flipFlop3.GetQPrime());
+    _values[9] = Gate::Nor(_flipFlop4.GetQPrime(), _flipFlop3.GetQ());
+    _values[11] = Gate::Nor(_flipFlop4.GetQ(), _flipFlop5.GetQPrime());
+    _values[12] = _flipFlop5.GetQPrime();
+}
+
 nts::Tristate nts::C4017::compute(size_t pin)
 {
     ++_cycle;
@@ -23,9 +39,9 @@ nts::Tristate nts::C4017::compute(size_t pin)
         reset();
         return UNDEFINED;
     }
-    Tristate in_0 = _links[14]->compute(_linksPin[14]);
-    Tristate in_1 = _links[13]->compute(_linksPin[13]);
-    Tristate in_r = _links[15]->compute(_linksPin[15]);
+    Tristate in_0 = computePin(14);
+    Tristate in_1 = computePin(13);
+    Tristate in_r = computePin(15);
     if (IS_UNDEFINED(in_0) || IS_UNDEFINED(in_1) || IS_UNDEFINED(in_r))
         return UNDEFINED;
     Tristate clock = Gate::And(in_0, Gate::Not(in_1));
@@ -41,44 +57,8 @@ nts::Tristate nts::C4017::compute(size_t pin)
     _flipFlop3.compute(clock, data_3, set);
     _flipFlop4.compute(clock, flip3Q, set);
     _flipFlop5.compute(clock, flip4Q, set);
-    switch (pin) {
-        case 3:
-            _values[3] = Gate::Nor(_flipFlop5.GetQ(), _flipFlop1.GetQ());
-            return _values.at(3);
-        case 2:
-            _values[2] = Gate::Nor(_flipFlop2.GetQ(), _flipFlop1.GetQPrime());
-            return _values.at(2);
-        case 4:
-            _values[4] = Gate::Nor(_flipFlop2.GetQPrime(), _flipFlop3.GetQ());
-            return _values.at(4);
-        case 7:
-            _values[7] = Gate::Nor(_flipFlop4.GetQ(), _flipFlop3.GetQPrime());
-            return _values.at(7);
-        case 10:
-            _values[10] = Gate::Nor(_flipFlop5.GetQ(), _flipFlop4.GetQPrime());
-            return _values.at(10);
-        case 1:
-            _values[11] = Gate::Nor(_flipFlop1.GetQPrime(), _flipFlop5.GetQPrime());
-            return _values.at(11);
-        case 5:
-            _values[5] = Gate::Nor(_flipFlop1.GetQ(), _flipFlop2.GetQPrime());
-            return _values.at(5);
-        case 6:
-            _values[6] = Gate::Nor(_flipFlop2.GetQ(), _flipFlop3.GetQPrime());
-            return _values.at(6);
-        case 9:
-            _values[9] = Gate::Nor(_flipFlop4.GetQPrime(), _flipFlop3.GetQ());
-            return _values.at(9);
-        case 11:
-            _values[11] = Gate::Nor(_flipFlop4.GetQ(), _flipFlop5.GetQPrime());
-            return _values.at(11);
-        case 12:
-            _values[12] = _flipFlop5.GetQPrime();
-            return _values.at(12);
-        default:
-            throw std::out_of_range("Pin out of range");
-    }
-    return UNDEFINED;
+    simulate();
+    return getValue(pin);
 }
 
 void nts::C4017::dump() const

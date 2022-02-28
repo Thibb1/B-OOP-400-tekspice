@@ -18,13 +18,15 @@ namespace nts {
     class AComponent : public nts::IComponent {
         public:
             virtual ~AComponent() = default;
-            virtual Tristate compute(size_t pin) = 0;
+            virtual Tristate compute(size_t pin);
             virtual void simulate(size_t tick = 1);
             virtual void setLink(size_t pin, IComponent &other, size_t otherPin);
             virtual void dump() const;
             virtual void reset();
             virtual void setValue(Tristate);
             virtual std::string getTristateString(size_t) const;
+            virtual Tristate getValue(size_t) const;
+            virtual Tristate computePin(size_t);
         protected:
             Tristate _value = UNDEFINED;
             size_t _nbPin = 3;

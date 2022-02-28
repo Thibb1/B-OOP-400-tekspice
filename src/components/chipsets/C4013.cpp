@@ -16,42 +16,25 @@ nts::C4013::~C4013()
 {
 }
 
-nts::Tristate nts::C4013::compute(size_t pin)
+void nts::C4013::simulate(size_t pin)
 {
-    ++_cycle;
-    if (_cycle >= 10000) {
-        reset();
-        return UNDEFINED;
-    }
+    (void) pin;
     _flipFlop1.compute(
-        _links[3]->compute(_linksPin[3]),
-        _links[5]->compute(_linksPin[5]),
-        _links[6]->compute(_linksPin[6]),
-        _links[4]->compute(_linksPin[4])
+        computePin(3),
+        computePin(5),
+        computePin(6),
+        computePin(4)
     );
     _flipFlop2.compute(
-        _links[11]->compute(_linksPin[11]),
-        _links[9]->compute(_linksPin[9]),
-        _links[8]->compute(_linksPin[8]),
-        _links[10]->compute(_linksPin[10])
+        computePin(11),
+        computePin(9),
+        computePin(8),
+        computePin(10)
     );
-    switch (pin) {
-        case 1:
-            _values[1] = _flipFlop1.GetQ();
-            return _values.at(1);
-        case 2:
-            _values[2] = _flipFlop1.GetQPrime();
-            return _values.at(2);
-        case 12:
-            _values[12] = _flipFlop2.GetQPrime();
-            return _values.at(12);
-        case 13:
-            _values[13] = _flipFlop2.GetQ();
-            return _values.at(13);
-        default:
-            throw std::out_of_range("Pin out of range");
-    }
-    return UNDEFINED;
+    _values[1] = _flipFlop1.GetQ();
+    _values[2] = _flipFlop1.GetQPrime();
+    _values[12] = _flipFlop2.GetQPrime();
+    _values[13] = _flipFlop2.GetQ();
 }
 
 void nts::C4013::dump() const

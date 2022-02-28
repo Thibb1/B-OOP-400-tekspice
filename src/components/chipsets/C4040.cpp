@@ -16,64 +16,36 @@ nts::C4040::~C4040()
 {
 }
 
-nts::Tristate nts::C4040::getPin(size_t pin)
+void nts::C4040::simulate(size_t pin)
 {
-    switch (pin) {
-        case 9:
-            _values[9] = _flipFlop_01->GetQ();
-            return _values.at(9);
-        case 7:
-            _values[7] = _flipFlop_02->GetQ();
-            return _values.at(7);
-        case 6:
-            _values[6] = _flipFlop_03->GetQ();
-            return _values.at(6);
-        case 5:
-            _values[5] = _flipFlop_04->GetQ();
-            return _values.at(5);
-        case 3:
-            _values[3] = _flipFlop_05->GetQ();
-            return _values.at(3);
-        case 2:
-            _values[2] = _flipFlop_06->GetQ();
-            return _values.at(2);
-        case 4:
-            _values[4] = _flipFlop_07->GetQ();
-            return _values.at(4);
-        case 13:
-            _values[13] = _flipFlop_08->GetQ();
-            return _values.at(13);
-        case 12:
-            _values[12] = _flipFlop_09->GetQ();
-            return _values.at(12);
-        case 14:
-            _values[14] = _flipFlop_10->GetQ();
-            return _values.at(14);
-        case 15:
-            _values[15] = _flipFlop_11->GetQ();
-            return _values.at(15);
-        case 1:
-            _values[1] = _flipFlop_12->GetQ();
-            return _values.at(1);
-        default:
-            throw std::out_of_range("Pin out of range");
-    }
-    return UNDEFINED;
+    (void) pin;
+    _values[9] = _flipFlop_01->GetQ();
+    _values[7] = _flipFlop_02->GetQ();
+    _values[6] = _flipFlop_03->GetQ();
+    _values[5] = _flipFlop_04->GetQ();
+    _values[3] = _flipFlop_05->GetQ();
+    _values[2] = _flipFlop_06->GetQ();
+    _values[4] = _flipFlop_07->GetQ();
+    _values[13] = _flipFlop_08->GetQ();
+    _values[12] = _flipFlop_09->GetQ();
+    _values[14] = _flipFlop_10->GetQ();
+    _values[15] = _flipFlop_11->GetQ();
+    _values[1] = _flipFlop_12->GetQ();
 }
-
 
 nts::Tristate nts::C4040::compute(size_t pin)
 {
     ++_cycle;
     if (_cycle >= 1000) {
         reset();
-        return getPin(pin);
+        simulate();
+        return getValue(pin);
     }
-    Tristate cl_clock = _links[10]->compute(_linksPin[10]);
-    Tristate in_reset = _links[11]->compute(_linksPin[11]);
+    Tristate cl_clock = computePin(10);
+    Tristate in_reset = computePin(11);
     if (IS_UNDEFINED(cl_clock) || IS_UNDEFINED(in_reset))
         return UNDEFINED;
-    Tristate data = Gate::Nor(Gate::Not(cl_clock), in_reset);
+    Tristate data = Gate::Not(Gate::Or(Gate::Not(cl_clock), in_reset));
     Tristate clock = Gate::Not(data);
     Tristate set = Gate::Not(in_reset);
     _flipFlop_01->compute(clock, data, set);
@@ -88,7 +60,8 @@ nts::Tristate nts::C4040::compute(size_t pin)
     _flipFlop_10->compute(_flipFlop_09->GetQPrime(), _flipFlop_09->GetQ(), set);
     _flipFlop_11->compute(_flipFlop_10->GetQPrime(), _flipFlop_10->GetQ(), set);
     _flipFlop_12->compute(_flipFlop_11->GetQPrime(), _flipFlop_11->GetQ(), set);
-    return getPin(pin);
+    simulate();
+    return getValue(pin);
 }
 
 void nts::C4040::dump() const

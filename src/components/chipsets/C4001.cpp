@@ -16,30 +16,24 @@ nts::C4001::~C4001()
 {
 }
 
-nts::Tristate nts::C4001::compute(size_t pin)
+void nts::C4001::simulate(size_t pin)
 {
-    ++_cycle;
-    if (_cycle >= 10000) {
-        reset();
-        return UNDEFINED;
-    }
     switch (pin) {
         case 3:
-            _values[3] = Gate::Nor(_links[1]->compute(_linksPin[1]), _links[2]->compute(_linksPin[2]));
-            return _values[3];
+            _values[3] = Gate::Nor(computePin(1), computePin(2));
+            break;
         case 4:
-            _values[4] = Gate::Nor(_links[5]->compute(_linksPin[5]), _links[6]->compute(_linksPin[6]));
-            return _values[4];
+            _values[4] = Gate::Nor(computePin(5), computePin(6));
+            break;
         case 10:
-            _values[10] = Gate::Nor(_links[8]->compute(_linksPin[8]), _links[9]->compute(_linksPin[9]));
-            return _values[10];
+            _values[10] = Gate::Nor(computePin(8), computePin(9));
+            break;
         case 11:
-            _values[11] = Gate::Nor(_links[12]->compute(_linksPin[12]), _links[13]->compute(_linksPin[13]));
-            return _values[11];
+            _values[11] = Gate::Nor(computePin(12), computePin(13));
+            break;
         default:
-            throw std::out_of_range("Pin out of range");
+            throw std::out_of_range("PinError: pin out of range");
     }
-    return UNDEFINED;
 }
 
 void nts::C4001::dump() const

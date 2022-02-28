@@ -16,10 +16,10 @@ namespace nts {
         public:
             C4008();
             ~C4008();
-            Tristate compute(size_t pin = 1);
             Tristate computeSum(Tristate, Tristate, Tristate);
             Tristate computeCarry(Tristate, Tristate, Tristate);
             void dump() const;
+            void simulate(size_t = 1);
         protected:
         private:
     };

@@ -15,10 +15,9 @@ nts::COutput::~COutput()
 {
 }
 
-void nts::COutput::simulate(size_t tick)
+void nts::COutput::simulate(size_t pin)
 {
-    (void) tick;
-    setValue(compute(tick));
+    setValue(compute(pin));
 }
 
 nts::Tristate nts::COutput::compute(size_t pin)
@@ -27,7 +26,7 @@ nts::Tristate nts::COutput::compute(size_t pin)
         throw std::runtime_error("PinError: pin out of range");
     if (_links.size() == 0)
         return UNDEFINED;
-    Tristate value = _links[1]->compute(_linksPin[1]);
+    Tristate value = computePin(1);
     _links[1]->reset();
     return value;
 }

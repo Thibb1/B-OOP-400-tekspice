@@ -15,7 +15,7 @@ namespace nts {
         public:
             C4030();
             ~C4030();
-            Tristate compute(size_t pin = 1);
+            void simulate(size_t = 1);
             void dump() const;
         protected:
         private:
