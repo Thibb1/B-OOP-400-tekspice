@@ -18,6 +18,7 @@ namespace nts {
             ~C4040();
             Tristate compute(size_t pin = 1);
             Tristate getPin(size_t pin);
+            void dump() const;
         protected:
         private:
             FlipFlop *_flipFlop_01 = new FlipFlop(TFLIP);

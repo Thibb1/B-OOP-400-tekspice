@@ -17,6 +17,7 @@ namespace nts {
             C4017();
             ~C4017();
             Tristate compute(size_t pin = 1);
+            void dump() const;
         protected:
         private:
             FlipFlop _flipFlop1;

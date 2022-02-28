@@ -17,6 +17,7 @@ namespace nts {
             C4011();
             ~C4011();
             Tristate compute(size_t pin = 1);
+            void dump() const;
         protected:
         private:
     };

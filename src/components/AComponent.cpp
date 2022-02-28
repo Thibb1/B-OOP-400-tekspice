@@ -37,3 +37,16 @@ void nts::AComponent::simulate(size_t tick)
 {
     (void) tick;
 }
+
+std::string nts::AComponent::getTristateString(size_t pin) const
+{
+    Tristate state = UNDEFINED;
+    if (_values.find(pin) != _values.end())
+        state = _values.at(pin);
+    if (state == UNDEFINED)
+        return "U";
+    else if (state == TRUE)
+        return "1";
+    else
+        return "0";
+}

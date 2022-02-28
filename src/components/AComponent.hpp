@@ -19,14 +19,16 @@ namespace nts {
         public:
             virtual ~AComponent() = default;
             virtual Tristate compute(size_t pin) = 0;
-            virtual void simulate(std::size_t tick);
+            virtual void simulate(size_t tick = 1);
             virtual void setLink(size_t pin, IComponent &other, size_t otherPin);
             virtual void dump() const;
             virtual void reset();
             virtual void setValue(Tristate);
+            virtual std::string getTristateString(size_t) const;
         protected:
             Tristate _value = UNDEFINED;
             size_t _nbPin = 3;
+            std::unordered_map<size_t, Tristate> _values;
             std::unordered_map<size_t, IComponent *> _links;
             std::unordered_map<size_t, size_t> _linksPin;
             size_t _cycle = 0;

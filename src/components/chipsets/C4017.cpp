@@ -18,6 +18,11 @@ nts::C4017::~C4017()
 
 nts::Tristate nts::C4017::compute(size_t pin)
 {
+    ++_cycle;
+    if (_cycle >= 10000) {
+        reset();
+        return UNDEFINED;
+    }
     Tristate in_0 = _links[14]->compute(_linksPin[14]);
     Tristate in_1 = _links[13]->compute(_linksPin[13]);
     Tristate in_r = _links[15]->compute(_linksPin[15]);
@@ -38,29 +43,55 @@ nts::Tristate nts::C4017::compute(size_t pin)
     _flipFlop5.compute(clock, flip4Q, set);
     switch (pin) {
         case 3:
-            return Gate::Nor(_flipFlop5.GetQ(), _flipFlop1.GetQ());
+            _values[3] = Gate::Nor(_flipFlop5.GetQ(), _flipFlop1.GetQ());
+            return _values.at(3);
         case 2:
-            return Gate::Nor(_flipFlop2.GetQ(), _flipFlop1.GetQPrime());
+            _values[2] = Gate::Nor(_flipFlop2.GetQ(), _flipFlop1.GetQPrime());
+            return _values.at(2);
         case 4:
-            return Gate::Nor(_flipFlop2.GetQPrime(), _flipFlop3.GetQ());
+            _values[4] = Gate::Nor(_flipFlop2.GetQPrime(), _flipFlop3.GetQ());
+            return _values.at(4);
         case 7:
-            return Gate::Nor(_flipFlop4.GetQ(), _flipFlop3.GetQPrime());
+            _values[7] = Gate::Nor(_flipFlop4.GetQ(), _flipFlop3.GetQPrime());
+            return _values.at(7);
         case 10:
-            return Gate::Nor(_flipFlop5.GetQ(), _flipFlop4.GetQPrime());
+            _values[10] = Gate::Nor(_flipFlop5.GetQ(), _flipFlop4.GetQPrime());
+            return _values.at(10);
         case 1:
-            return Gate::Nor(_flipFlop1.GetQPrime(), _flipFlop5.GetQPrime());
+            _values[11] = Gate::Nor(_flipFlop1.GetQPrime(), _flipFlop5.GetQPrime());
+            return _values.at(11);
         case 5:
-            return Gate::Nor(_flipFlop1.GetQ(), _flipFlop2.GetQPrime());
+            _values[5] = Gate::Nor(_flipFlop1.GetQ(), _flipFlop2.GetQPrime());
+            return _values.at(5);
         case 6:
-            return Gate::Nor(_flipFlop2.GetQ(), _flipFlop3.GetQPrime());
+            _values[6] = Gate::Nor(_flipFlop2.GetQ(), _flipFlop3.GetQPrime());
+            return _values.at(6);
         case 9:
-            return Gate::Nor(_flipFlop4.GetQPrime(), _flipFlop3.GetQ());
+            _values[9] = Gate::Nor(_flipFlop4.GetQPrime(), _flipFlop3.GetQ());
+            return _values.at(9);
         case 11:
-            return Gate::Nor(_flipFlop4.GetQ(), _flipFlop5.GetQPrime());
+            _values[11] = Gate::Nor(_flipFlop4.GetQ(), _flipFlop5.GetQPrime());
+            return _values.at(11);
         case 12:
-            return _flipFlop5.GetQPrime();
+            _values[12] = _flipFlop5.GetQPrime();
+            return _values.at(12);
         default:
             throw std::out_of_range("Pin out of range");
     }
     return UNDEFINED;
+}
+
+void nts::C4017::dump() const
+{
+    std::cout << "\n    01: " << getTristateString(3);
+    std::cout << "\n    02: " << getTristateString(2);
+    std::cout << "\n    03: " << getTristateString(4);
+    std::cout << "\n    04: " << getTristateString(7);
+    std::cout << "\n    05: " << getTristateString(10);
+    std::cout << "\n    06: " << getTristateString(1);
+    std::cout << "\n    07: " << getTristateString(5);
+    std::cout << "\n    08: " << getTristateString(6);
+    std::cout << "\n    09: " << getTristateString(9);
+    std::cout << "\n    10: " << getTristateString(11);
+    std::cout << "\n    11: " << getTristateString(12) << std::endl;
 }

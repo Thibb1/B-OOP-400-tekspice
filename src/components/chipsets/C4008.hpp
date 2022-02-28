@@ -19,6 +19,7 @@ namespace nts {
             Tristate compute(size_t pin = 1);
             Tristate computeSum(Tristate, Tristate, Tristate);
             Tristate computeCarry(Tristate, Tristate, Tristate);
+            void dump() const;
         protected:
         private:
     };
