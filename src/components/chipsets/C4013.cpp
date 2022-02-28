@@ -31,10 +31,10 @@ void nts::C4013::simulate(size_t pin)
         computePin(8),
         computePin(10)
     );
-    _values[1] = _flipFlop1.GetQ();
-    _values[2] = _flipFlop1.GetQPrime();
-    _values[12] = _flipFlop2.GetQPrime();
-    _values[13] = _flipFlop2.GetQ();
+    _values[1] = _flipFlop1.GetQPrime();
+    _values[2] = _flipFlop1.GetQ();
+    _values[12] = _flipFlop2.GetQ();
+    _values[13] = _flipFlop2.GetQPrime();
 }
 
 void nts::C4013::dump() const
