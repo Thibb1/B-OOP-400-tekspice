@@ -28,8 +28,7 @@ bool Parser::isInVector(std::string str, std::vector<std::string> vec)
 void Parser::parseLink(std::string line, nts::Factory *factory)
 {
     std::string linkPattern = "^((\\w+):(\\d+)) ((\\w+):(\\d+))$";
-    static std::vector<std::string> linksInputVec;
-    static std::vector<std::string> linksOutputVec;
+    static std::vector<std::string> linksVec;
     if (RegUtils::isMatch(line, linkPattern)) {
         std::smatch smatch = RegUtils::getMatch(line, linkPattern);
         std::string chipsetLink = smatch[1].str();
@@ -39,12 +38,9 @@ void Parser::parseLink(std::string line, nts::Factory *factory)
         std::string link = smatch[5].str();
         int linkPin = std::stoi(smatch[6].str());
 
-        if (isInVector(chipsetLink, linksInputVec))
-            throw std::invalid_argument("Duplicate link input: " + line);
-        linksInputVec.push_back(chipsetLink);
-        if (isInVector(linkLinkPin, linksOutputVec))
-            throw std::invalid_argument("Duplicate link output: " + line);
-        linksInputVec.push_back(linkLinkPin);
+        if (isInVector(chipsetLink, linksVec))
+            throw std::invalid_argument("Duplicate link: " + line);
+        linksVec.push_back(chipsetLink);
         auto chipsetInput = factory->GetChipset(chipset);
         auto chipsetOutput = factory->GetChipset(link);
         chipsetInput->setLink(pin, *chipsetOutput, linkPin);
