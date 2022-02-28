@@ -21,9 +21,9 @@ namespace nts {
         public:
             virtual ~IComponent() = default;
 
-            virtual void simulate(std::size_t tick) = 0;
-            virtual Tristate compute(std::size_t pin) = 0;
-            virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
+            virtual void simulate(size_t tick = 1) = 0;
+            virtual Tristate compute(size_t pin) = 0;
+            virtual void setLink(size_t pin, IComponent &other, size_t otherPin) = 0;
             virtual void dump() const = 0;
             virtual void setValue(Tristate) = 0;
             virtual void reset() = 0;

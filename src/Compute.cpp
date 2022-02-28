@@ -30,6 +30,7 @@ void nts::Compute::Display()
         std::cout << "  " << input.first << ": ";
         input.second->dump();
     }
+    SimulateOutput();
     std::cout << "output(s):\n";
     for (auto &output : _outputs) {
         std::cout << "  " << output.first << ": ";
@@ -37,24 +38,29 @@ void nts::Compute::Display()
     }
 }
 
+void  nts::Compute::SimulateOutput()
+{
+    for (auto &output : _outputs) {
+        output.second->simulate();
+        output.second->reset();
+        for (auto &comp : _comps) {
+            comp.second->reset();
+        }
+    }
+}
+
 void nts::Compute::Simulate()
 {
     ++_ticks;
     for (auto &input : _inputs) {
-        input.second->simulate(_ticks);
+        input.second->simulate();
     }
     auto values_it = _values;
     for (auto &new_val : values_it) {
         _inputs[new_val.first]->setValue(new_val.second);
         _values.erase(new_val.first);
     }
-    for (auto &output : _outputs) {
-        output.second->simulate(1);
-        output.second->reset();
-        for (auto &comp : _comps) {
-            comp.second->reset();
-        }
-    }
+    SimulateOutput();
 }
 
 void nts::Compute::AddChange(std::string const &str)
@@ -101,6 +107,14 @@ void nts::Compute::Run()
         }
         if (RegUtils::isMatch(line, "^loop$")) {
             Loop();
+        }
+        if (RegUtils::isMatch(line, "^dump$")) {
+            Display();
+            std::cout << "component(s):\n";
+            for (auto &comp : _comps) {
+                std::cout << "  " << comp.first << ": ";
+                comp.second->dump();
+            }
         }
         std::cout << "> ";
     }
