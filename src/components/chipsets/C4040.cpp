@@ -45,8 +45,8 @@ nts::Tristate nts::C4040::compute(size_t pin)
     Tristate in_reset = computePin(11);
     if (IS_UNDEFINED(cl_clock) || IS_UNDEFINED(in_reset))
         return UNDEFINED;
-    Tristate data = Gate::Not(Gate::Or(Gate::Not(cl_clock), in_reset));
-    Tristate clock = Gate::Not(data);
+    Tristate clock = Gate::Nor(cl_clock, in_reset);
+    Tristate data = Gate::Not(clock);
     Tristate set = Gate::Not(in_reset);
     _flipFlop_01->compute(clock, data, set);
     _flipFlop_02->compute(_flipFlop_01->GetQPrime(), _flipFlop_01->GetQ(), set);
