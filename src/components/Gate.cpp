@@ -23,7 +23,7 @@ nts::Tristate nts::Gate::Or(Tristate a, Tristate b)
 
 nts::Tristate nts::Gate::Nor(Tristate a, Tristate b)
 {
-    return Or(Not(a), Not(b));
+    return Not(Or(a, b));
 }
 
 nts::Tristate nts::Gate::And(Tristate a, Tristate b)
