@@ -19,16 +19,16 @@ nts::C4017::~C4017()
 void nts::C4017::simulate(size_t pin)
 {
     (void) pin;
-    _values[3] = Gate::Not(Gate::Or(_flipFlop5.GetQ(), _flipFlop1.GetQ()));
-    _values[2] = Gate::Not(Gate::Or(_flipFlop2.GetQ(), _flipFlop1.GetQPrime()));
-    _values[4] = Gate::Not(Gate::Or(_flipFlop2.GetQPrime(), _flipFlop3.GetQ()));
-    _values[7] = Gate::Not(Gate::Or(_flipFlop4.GetQ(), _flipFlop3.GetQPrime()));
-    _values[10] = Gate::Not(Gate::Or(_flipFlop5.GetQ(), _flipFlop4.GetQPrime()));
-    _values[11] = Gate::Not(Gate::Or(_flipFlop1.GetQPrime(), _flipFlop5.GetQPrime()));
-    _values[5] = Gate::Not(Gate::Or(_flipFlop1.GetQ(), _flipFlop2.GetQPrime()));
-    _values[6] = Gate::Not(Gate::Or(_flipFlop2.GetQ(), _flipFlop3.GetQPrime()));
-    _values[9] = Gate::Not(Gate::Or(_flipFlop4.GetQPrime(), _flipFlop3.GetQ()));
-    _values[11] = Gate::Not(Gate::Or(_flipFlop4.GetQ(), _flipFlop5.GetQPrime()));
+    _values[3] = Gate::Nor(_flipFlop5.GetQ(), _flipFlop1.GetQ());
+    _values[2] = Gate::Nor(_flipFlop2.GetQ(), _flipFlop1.GetQPrime());
+    _values[4] = Gate::Nor(_flipFlop2.GetQPrime(), _flipFlop3.GetQ());
+    _values[7] = Gate::Nor(_flipFlop4.GetQ(), _flipFlop3.GetQPrime());
+    _values[10] = Gate::Nor(_flipFlop5.GetQ(), _flipFlop4.GetQPrime());
+    _values[1] = Gate::Nor(_flipFlop1.GetQPrime(), _flipFlop5.GetQPrime());
+    _values[5] = Gate::Nor(_flipFlop1.GetQ(), _flipFlop2.GetQPrime());
+    _values[6] = Gate::Nor(_flipFlop2.GetQ(), _flipFlop3.GetQPrime());
+    _values[9] = Gate::Nor(_flipFlop4.GetQPrime(), _flipFlop3.GetQ());
+    _values[11] = Gate::Nor(_flipFlop4.GetQ(), _flipFlop5.GetQPrime());
     _values[12] = _flipFlop5.GetQPrime();
 }
 
